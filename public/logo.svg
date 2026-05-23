@@ -1,0 +1,63 @@
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <!-- Gradient -->
+    <linearGradient id="g1" x1="40" y1="200" x2="200" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#16A34A"/>
+      <stop offset="100%" stop-color="#6CC58D"/>
+    </linearGradient>
+
+    <!-- Glow -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- SYMBOL -->
+  <g filter="url(#glow)">
+
+    <!-- Circular Orbit -->
+    <path
+      d="M120 28
+         C172 28 212 68 212 120
+         C212 172 172 212 120 212
+         C68 212 28 172 28 120"
+      stroke="url(#g1)"
+      stroke-width="16"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Upward AI Arrow -->
+    <path
+      d="M72 142
+         L108 106
+         L132 130
+         L176 78"
+      stroke="url(#g1)"
+      stroke-width="18"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"
+    />
+
+    <!-- Arrow Head -->
+    <path
+      d="M156 78H176V98"
+      stroke="url(#g1)"
+      stroke-width="18"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"
+    />
+
+    <!-- AI Core Dot -->
+    <circle cx="120" cy="120" r="12" fill="url(#g1)"/>
+
+  </g>
+
+</svg>
