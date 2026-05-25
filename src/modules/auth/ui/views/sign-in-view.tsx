@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 
 const formSchema = z.object({
     email: z
@@ -58,6 +59,36 @@ export const SignInView = () => {
             {
                 email: data.email,
                 password: data.password,
+                callbackURL: "/"
+            },
+            {
+                onSuccess: () => {
+                    setPending(false);
+                    router.push("/");
+                },
+
+                onError: ({ error }) => {
+                    setPending(false);
+
+                    if (error.message.toLowerCase().includes("invalid")) {
+                        setError("Invalid email or password");
+                    } else {
+                        setError(error.message);
+                    }
+                },
+            }
+        );
+        // form.reset();
+    };
+
+    const onSocial = (provider: "github" | "google") => {
+        setError(null);
+        setPending(true);
+
+        authClient.signIn.social(
+            {
+                provider: provider,
+                callbackURL: "/"
             },
             {
                 onSuccess: () => {
@@ -211,17 +242,20 @@ export const SignInView = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <Button
                                         disabled={pending}
+                                        onClick={() => onSocial("google")}
                                         variant="outline"
                                         type="button"
                                         className="w-full">
-                                        Google
+                                        <FaGoogle/>
                                     </Button>
                                     <Button
                                         disabled={pending}
+                                        onClick={() => onSocial("github")}
+
                                         variant="outline"
                                         type="button"
                                         className="w-full">
-                                        Github
+                                        <FaGithub/>
                                     </Button>
                                 </div>
 
