@@ -143,7 +143,7 @@ export const SignUpView = () => {
 
     return (
         <div>
-            <div className="flex h-full items-center justify-center bg-muted/40 p-4">
+            <div className="flex h-full items-center justify-center bg-muted/40 p-2">
                 <Card className="w-full max-w-5xl overflow-hidden border-0 shadow-2xl">
                     <CardContent className="grid p-0 md:grid-cols-2">
 
@@ -374,7 +374,7 @@ export const SignUpView = () => {
                         </div>
 
                         {/* RIGHT SIDE */}
-                        <div className="relative hidden items-center justify-center bg-gradient-to-br from-green-700 to-green-900 md:flex">
+                        <div className="relative hidden items-center justify-center bg-gradient-to-br from-sidebar-accent to-sidebar md:flex">
 
                             <div className="absolute inset-0 bg-black/10" />
 

@@ -275,7 +275,7 @@ export const SignInView = () => {
                         </div>
 
                         {/* RIGHT SIDE */}
-                        <div className="relative hidden items-center justify-center bg-gradient-to-br from-green-700 to-green-900 md:flex">
+                        <div className="relative hidden items-center justify-center bg-gradient-to-br from-sidebar-accent to-sidebar md:flex">
 
                             <div className="absolute inset-0 bg-black/10" />
 
