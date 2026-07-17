@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import {
-  CommandDialog,
+  CommandResponsiveDialog,
   CommandInput,
   CommandList,
   CommandItem,
@@ -17,7 +17,7 @@ interface DashboardCommandProps {
 
 export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandResponsiveDialog open={open} onOpenChange={setOpen}>
       <CommandInput placeholder="Find a meeting or agent..." />
 
       <CommandList>
@@ -25,6 +25,6 @@ export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
 
         <CommandItem value="test">Test</CommandItem>
       </CommandList>
-    </CommandDialog>
+    </CommandResponsiveDialog>
   );
 };
