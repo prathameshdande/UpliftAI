@@ -5,10 +5,8 @@ import { z } from 'zod';
 import { toast } from 'sonner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
 import { useTRPC } from '@/trpc/client';
-import { AgentGetOne } from '@/modules/agents/types';
 import { agentsInsertSchema } from '@/modules/agents/schemas';
 
 import { Input } from '@/components/ui/input';
@@ -16,21 +14,26 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { GeneratedAvatar } from '@/components/generated-avatar';
 
+type AgentFormInitialValues = {
+  id?: string;
+  name?: string;
+  instructions?: string;
+};
+
 interface AgentsFormProps {
   onSuccess?: () => void;
   onCancel?: () => void;
-  initialValues?: AgentGetOne;
+  initialValues?: AgentFormInitialValues;
 }
 
 export const AgentsForm = ({ onSuccess, onCancel, initialValues }: AgentsFormProps) => {
   const trpc = useTRPC();
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const createAgent = useMutation(
     trpc.agents.create.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions());
+        await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
 
         if (initialValues?.id) {
           await queryClient.invalidateQueries(

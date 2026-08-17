@@ -2,12 +2,7 @@
 
 import { useTable, type ColumnDef, type RowData } from '@tanstack/react-table';
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 
 import { features, type DataTableFeatures } from './data-table-features';
 
@@ -26,7 +21,6 @@ export function DataTable<TData extends RowData>({
     features,
     data,
     columns,
-    onRowClick,
   });
 
   return (
@@ -63,9 +57,9 @@ export function DataTable<TData extends RowData>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-19 text-center text-muted-foreground">
+              {/* <TableCell colSpan={columns.length} className="h-19 text-center text-muted-foreground">
                 No results.
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           )}
         </TableBody>

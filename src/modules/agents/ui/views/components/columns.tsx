@@ -2,12 +2,12 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 
-import { AgentGetOne } from '@/modules/agents/types';
+import { AgentGetManyItem } from '@/modules/agents/types';
 import { GeneratedAvatar } from '@/components/generated-avatar';
 import { CornerDownRightIcon, VideoIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-export const columns: ColumnDef<AgentGetOne>[] = [
+export const columns: ColumnDef<AgentGetManyItem>[] = [
   {
     accessorKey: 'name',
     header: 'Agent Name',
@@ -31,10 +31,10 @@ export const columns: ColumnDef<AgentGetOne>[] = [
   {
     accessorKey: 'meetingsCount',
     header: 'Meetings',
-    cell: () => (
+    cell: ({ row }) => (
       <Badge variant="outline" className="flex items-center gap-x-1 [&>svg]:size-4">
         <VideoIcon className="text-blue-700" />
-        5 meetings
+        <span>{row.original.meetingsCount} {row.original.meetingsCount === 1 ? 'meeting' : 'meetings'}</span>
       </Badge>
     ),
   },
