@@ -5,7 +5,7 @@ import {
   AgentsViewError,
   AgentsViewLoading,
 } from '@/modules/agents/ui/views/agents-view';
-import { AgentsListHeader } from '@/modules/agents/ui/views/components/list-header';
+import { AgentsListHeader } from '@/modules/agents/ui/components/list-header';
 import { getQueryClient, trpc } from '@/trpc/server';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { headers } from 'next/headers';
