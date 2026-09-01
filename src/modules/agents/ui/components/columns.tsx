@@ -4,8 +4,7 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { AgentGetManyItem } from '@/modules/agents/types';
 import { GeneratedAvatar } from '@/components/generated-avatar';
-import { CornerDownRightIcon, VideoIcon } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { CornerDownRightIcon } from 'lucide-react';
 
 export const columns: ColumnDef<AgentGetManyItem>[] = [
   {
@@ -27,15 +26,5 @@ export const columns: ColumnDef<AgentGetManyItem>[] = [
         </div>
       </div>
     ),
-  },
-  {
-    accessorKey: 'meetingsCount',
-    header: 'Meetings',
-    cell: ({ row }) => (
-      <Badge variant="outline" className="flex items-center gap-x-1 [&>svg]:size-4">
-        <VideoIcon className="text-blue-700" />
-        <span>{row.original.meetingsCount} {row.original.meetingsCount === 1 ? 'meeting' : 'meetings'}</span>
-      </Badge>
-    ),
-  },
+  }
 ];

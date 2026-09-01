@@ -5,8 +5,6 @@ import { LoadingState } from '@/components/loading-state';
 import { ErrorState } from '@/components/error-state';
 import { AgentIdViewHeader } from '../components/agent-id-view-header';
 import { GeneratedAvatar } from '@/components/generated-avatar';
-import { Badge } from '@/components/ui/badge';
-import { VideoIcon } from 'lucide-react';
 
 interface Props {
   agentId: string;
@@ -23,8 +21,6 @@ export const AgentIdView = ({ agentId }: Props) => {
       <AgentIdViewHeader
         agentId={agentId}
         agentName={data.name}
-        onEdit={() => { }}
-        onRemove={() => { }}
       />
 
       {/* Main Info Card Wrapper */}
@@ -41,19 +37,6 @@ export const AgentIdView = ({ agentId }: Props) => {
             <h2 className="text-2xl font-semibold tracking-tight text-neutral-900">
               {data.name}
             </h2>
-          </div>
-
-          {/* Metrics Block (Prevents badge from stretching full width) */}
-          <div className="flex items-start">
-            <Badge
-              variant="outline"
-              className="flex items-center gap-x-2 px-3 py-1 font-medium text-neutral-600"
-            >
-              <span>
-                {data.meetingsCount} {data.meetingsCount === 1 ? 'meeting' : 'meetings'}
-              </span>
-              <VideoIcon className="size-4 text-blue-700" />
-            </Badge>
           </div>
 
           {/* Separator Divider Line */}
@@ -76,14 +59,14 @@ export const AgentIdView = ({ agentId }: Props) => {
 };
 
 export const AgentIdViewLoading = () => {
-  return <LoadingState title="Loading agent" description="This may take few seconds" />;
+  return <LoadingState title="Loading agent" description="This may take a few seconds" />;
 };
 
 export const AgentIdViewError = () => {
   return (
     <ErrorState
       title="Error while loading an agent"
-      description="Something went wrong is happening"
+      description="Something went wrong"
     />
   );
 };
