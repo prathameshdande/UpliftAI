@@ -11,7 +11,10 @@ import { TRPCError } from '@trpc/server';
 export const agentsRouter = createTRPCRouter({
   getOne: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ input, ctx }) => {
     const [existingAgent] = await db
-      .select()
+      .select({
+        meetingsCount: sql<number>`5`,
+        ...getTableColumns(agents),
+      })
       .from(agents)
       .where(and(eq(agents.id, input.id), eq(agents.userId, ctx.auth.user.id)));
 
