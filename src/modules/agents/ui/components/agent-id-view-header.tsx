@@ -1,7 +1,5 @@
 import { ChevronRightIcon, TrashIcon, PencilIcon, MoreVerticalIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,8 +19,8 @@ import {
 interface Props {
     agentId: string;
     agentName: string;
-    onEdit: () => void;
-    onRemove: () => void;
+    onEdit?: () => void;
+    onRemove?: () => void;
 }
 
 export const AgentIdViewHeader = ({ agentId, agentName, onEdit, onRemove }: Props) => {
@@ -31,7 +29,7 @@ export const AgentIdViewHeader = ({ agentId, agentName, onEdit, onRemove }: Prop
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/agents" className="font-md text-xl">
+                        <BreadcrumbLink href="/agents" className="font-medium text-xl">
                             My Agents
                         </BreadcrumbLink>
                     </BreadcrumbItem>
@@ -39,30 +37,33 @@ export const AgentIdViewHeader = ({ agentId, agentName, onEdit, onRemove }: Prop
                         <ChevronRightIcon />
                     </BreadcrumbSeparator>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href={`/agents/${agentId}`} className="font-md text-xl text-foreground">
+                        <BreadcrumbLink href={`/agents/${agentId}`} className="font-medium text-xl text-foreground">
                             {agentName}
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
 
-
-            <DropdownMenu modal={false}>
-                {/* Fixed by adding asChild here */}
-                <DropdownMenuTrigger className="inline-flex items-center justify-center rounded-md p-2 text-neutral-500 hover:bg-neutral-100 transition-colors cursor-pointer">
-                    <MoreVerticalIcon className="size-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={onEdit}>
-                        <PencilIcon className="size-4 text-black" />
-                        Edit
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={onRemove}>
-                        <TrashIcon className="size-4 text-black" />
-                        Remove
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+            {onEdit && onRemove && (
+                <DropdownMenu modal={false}>
+                    <DropdownMenuTrigger
+                        aria-label="Open agent actions menu"
+                        className="inline-flex items-center justify-center rounded-md p-2 text-neutral-500 hover:bg-neutral-100 transition-colors cursor-pointer"
+                    >
+                        <MoreVerticalIcon className="size-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={onEdit}>
+                            <PencilIcon className="size-4 text-black" />
+                            Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={onRemove}>
+                            <TrashIcon className="size-4 text-black" />
+                            Remove
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )}
         </div>
     )
 }

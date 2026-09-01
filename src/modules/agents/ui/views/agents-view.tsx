@@ -26,9 +26,6 @@ export const AgentsView = () => {
         columns={columns}
         data={data.items}
         onRowClick={(row) => {
-          console.log("ROW CLICKED:", row);
-          console.log("ID:", row.id);
-
           router.push(`/agents/${row.id}`);
         }}
       />
