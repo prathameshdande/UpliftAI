@@ -35,11 +35,6 @@ export const AgentsForm = ({ onSuccess, onCancel, initialValues }: AgentsFormPro
       onSuccess: async () => {
         await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
 
-        if (initialValues?.id) {
-          await queryClient.invalidateQueries(
-            trpc.agents.getOne.queryOptions({ id: initialValues.id })
-          );
-        }
         onSuccess?.();
       },
       onError: (error) => {
@@ -56,16 +51,37 @@ export const AgentsForm = ({ onSuccess, onCancel, initialValues }: AgentsFormPro
     },
   });
 
-  const isEdit = !!initialValues?.id;
-  const isPending = createAgent.isPending;
-
   const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
-    if (isEdit) {
-      console.log('Edit agent functionality is not implemented yet.');
+    if (initialValues?.id) {
+      updateAgent.mutate({
+        ...values,
+        id: initialValues.id,
+      });
     } else {
       createAgent.mutate(values);
     }
   };
+
+  const updateAgent = useMutation(
+    trpc.agents.update.mutationOptions({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
+
+        if (initialValues?.id) {
+          await queryClient.invalidateQueries(
+            trpc.agents.getOne.queryOptions({ id: initialValues.id })
+          );
+        }
+        onSuccess?.();
+      },
+      onError: (error) => {
+        toast.error(`Failed to create agent: ${error.message}`);
+      },
+    })
+  );
+
+  const isEdit = !!initialValues?.id;
+  const isPending = createAgent.isPending || updateAgent.isPending;
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
